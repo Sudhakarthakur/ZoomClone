@@ -19,6 +19,7 @@ export const conectToSocket = (server) => {
       if (connections[path] === undefined) {
         connections[path] = [];
       }
+
       connections[path].push(socket.id);
       timeOnline[socket.id] = new Date();
 
@@ -63,15 +64,17 @@ export const conectToSocket = (server) => {
         messages[matchingRoom].push({
           sender: sender,
           data: data,
-          "socket-id-sender": socket - id - sender,
+          "socket-id-sender": socket.id
         });
-        console.log("message", key, ":", sender, data);
+        console.log("message", matchingRoom, ":", sender, data);
 
         connections[matchingRoom].forEach((elem) => {
           io.to(elem).emit("chat-message", data, sender, socket.id);
         });
       }
     });
+
+
     socket.on("disconnect", () => {
       var diffTime = Math.abs(timeOnline[socket.id] - new Date());
       var key;
