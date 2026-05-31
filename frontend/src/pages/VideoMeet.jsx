@@ -7,8 +7,9 @@ import VideocanIcon from "@mui/icons-material/Videocam"
 import CallEndIcon from "@mui/icons-material/CallEnd"
 import MicIcon from "@mui/icons-material/Mic"
 import MicOffIcon from "@mui/icons-material/MicOff"
-import ScreenShareIcon from "@mui/icons-material/ScreenShare";
-import StopScreenShareIcon from "@mui/icons-material/StopScreenShare";
+
+import ScreenShareIcon from '@mui/icons-material/ScreenShare';
+import StopScreenShareIcon from '@mui/icons-material/StopScreenShare';
 import ChatIcon from "@mui/icons-material/Chat"
 import styel from '../styles/Meet.module.css';
 
@@ -33,7 +34,7 @@ export default function VideoMeet() {
   let [screen, setScreen] = useState();
   let [showModal, setModal] = useState(true);
 
-  let [screenAvailable, setScreenAvailable] = useState();
+  let [screenAvailable, setScreenAvailable] = useState(false);
   let [message, setMessage] = useState("");
   let [messages, setMessages] = useState([]);
   let [newMessages, setNewMessages] = useState(0);

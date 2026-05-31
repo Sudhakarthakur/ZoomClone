@@ -1,10 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-
-
-
-
 export default function Landing() {
 
   const router = useNavigate();
@@ -18,13 +14,15 @@ export default function Landing() {
 
           <p onClick={() => {
             router("/aljk23")
-          }}>Join as Guest</p>
+          }} style={{ cursor: "pointer", }}>Join as Guest</p>
 
           <p onClick={() => {
             router("/auth")
-          }}>Register</p>
+          }} style={{ cursor: "pointer", }}>Register</p>
 
-          <div role="button">
+          <div onClick={() => {
+            router("/auth")
+          }} style={{ cursor: "pointer", }}>
             <p>Login</p>
           </div>
         </div>
