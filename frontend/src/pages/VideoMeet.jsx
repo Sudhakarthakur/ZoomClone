@@ -7,11 +7,12 @@ import VideocanIcon from "@mui/icons-material/Videocam"
 import CallEndIcon from "@mui/icons-material/CallEnd"
 import MicIcon from "@mui/icons-material/Mic"
 import MicOffIcon from "@mui/icons-material/MicOff"
-
-import ScreenShareIcon from '@mui/icons-material/ScreenShare';
+import ScreenShareIcon from "@mui/icons-material/ScreenShare";
+// import StopScreenShareIcon from "@mui/icons-material/StopScreenShare";
 import StopScreenShareIcon from '@mui/icons-material/StopScreenShare';
 import ChatIcon from "@mui/icons-material/Chat"
 import styel from '../styles/Meet.module.css';
+import withAuth from "../utils/withAuth";
 
 
 
@@ -22,7 +23,7 @@ const peertopeerConnections = {
   iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
 };
 
-export default function VideoMeet() {
+function VideoMeet() {
   var socketRef = useRef();
   let socketIdRef = useRef();
   let localVideoRef = useRef();
@@ -42,6 +43,11 @@ export default function VideoMeet() {
   let [username, setUsername] = useState("");
   const videRef = useRef([]);
   let [videos, setVideos] = useState([]);
+
+  // Request camera/audio permissions when component mounts
+  useEffect(() => {
+    getPermission();
+  }, []);
 
   const getPermission = async () => {
     try {
@@ -234,11 +240,7 @@ export default function VideoMeet() {
           .addIceCandidate(new RTCIceCandidate(signal.ice))
           .catch(e => console.log(e));
       }
-      // if (connections[fromId] && connections[fromId].remoteDescription) {
-      //   connections[fromId]
-      //     .addIceCandidate(new RTCIceCandidate(signal.ice))
-      //     .catch((e) => console.log(e));
-      // }
+
     }
   };
 
@@ -458,19 +460,22 @@ export default function VideoMeet() {
     <div>
       {askForUsername === true ? (
         <div>
-          <h2>Enter into Lobby</h2>
-          <TextField
-            id="outlined-basic"
-            label="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            variant="outlined"
-          />
-          <Button variant="contained" onClick={connect}>
-            Connect
-          </Button>
+          <h2 style={{ textAlign: "center", margin: "1.5rem" }}>Enter into Lobby</h2>
+          <div className={styel.formContainer}>
+            <TextField
+              id="outlined-basic"
+              label="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              variant="outlined"
 
-          <div>
+            />
+            <Button style={{ fontSize: "1.2rem", padding: "0.5rem" }} variant="contained" onClick={connect}>
+              Connect
+            </Button>
+          </div>
+
+          <div style={{ alignItems: "center", textAlign: "center", margin: "2rem", padding: "1rem", width: "100% ", objectFit: "cover", borderRadius: "40px" }}>
             <video ref={localVideoRef} autoPlay muted></video>
           </div>
         </div>
@@ -557,3 +562,5 @@ export default function VideoMeet() {
     </div >
   );
 }
+
+export default withAuth(VideoMeet);

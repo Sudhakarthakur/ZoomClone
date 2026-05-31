@@ -37,7 +37,10 @@ const login = async (req, res) => {
       user.token = token;
       await user.save();
       return res.status(httpStatus.OK).json({
-        token: token
+        token: token,
+        name: user.name,
+        username: user.username,
+        userId: user._id
       });
     } else {
       return res

@@ -12,9 +12,12 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import withAuth from '../utils/withAuth'
 
 
-export default function History() {
+export default withAuth(History);
+
+function History() {
 
     const { getHistoryOfUser } = useContext(AuthContext)
 

@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import withAuth from "../utils/withAuth";
 
-export default function Landing() {
+function Landing() {
 
   const router = useNavigate();
   return (
@@ -37,7 +38,7 @@ export default function Landing() {
           <p>Cover a distance by video call</p>
           <div role="button">
             <Link
-              to="hoem"
+              to={"/auth"}
               style={{
                 textDecoration: "none",
                 background: "#ff9838",
@@ -65,4 +66,4 @@ export default function Landing() {
 //   return <div>hello</div>;
 // }
 
-// export default Landing;
+export default Landing;
